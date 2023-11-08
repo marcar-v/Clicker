@@ -18,12 +18,16 @@ public class ObstaclesController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        SpawnObstacle();
+    }
+
+    void SpawnObstacle()
     {
         timer += Time.deltaTime;
 
-        if(timer > 10)
+        if (timer > 10)
         {
             Destroy(gameObject);
         }

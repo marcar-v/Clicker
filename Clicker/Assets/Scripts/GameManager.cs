@@ -11,24 +11,33 @@ public class GameManager : MonoBehaviour
     [SerializeField] float timeBetweenSpawn;
 
     public float speedMultiplier;
+    [SerializeField] Animator clickToJumpAnim;
+    [SerializeField] GameObject clickToJumpText;
 
-    [SerializeField] TextMeshProUGUI distanceText;
-    private float distance;
+    private void Start()
+    {
+        Invoke("PlayAnimation", 0.5f);
+    }
+
+    void PlayAnimation()
+    {
+        clickToJumpText.SetActive(true);
+        clickToJumpAnim.Play("ClicktoJumpAnim");
+    }
+
     void Update()
     {
-        distanceText.text = distance.ToString("F2");
-
         speedMultiplier += Time.deltaTime * 0.1f;
 
         timer += Time.deltaTime;
 
-        distance += Time.deltaTime * 0.8f;
-
-        if(timer > timeBetweenSpawn )
+        if(timer > timeBetweenSpawn)
         {
             timer = 0;
             int randomNumber = Random.Range(0, spawnPoints.Length);
             Instantiate(spawnObject, spawnPoints[randomNumber].transform.position, Quaternion.identity);
         }
     }
+
+
 }

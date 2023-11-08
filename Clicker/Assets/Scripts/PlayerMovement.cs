@@ -9,9 +9,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
+    bool isDead;
+    [SerializeField] GameObject gameOverCanvas;
+
+    AudioManager audioManager;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
     }
 
     void Update()
@@ -19,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Fire1") && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce);
+            audioManager.PlaySFX(audioManager.jumpSound);
         }
     }
 
@@ -31,7 +39,9 @@ public class PlayerMovement : MonoBehaviour
         
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            SceneManager.LoadScene(0);
+            isDead = true;
+            GameOver();
+
         }
     }
 
@@ -40,6 +50,16 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+        }
+    }
+
+    public void GameOver()
+    {
+        if(isDead)
+        {
+            audioManager.PlaySFX(audioManager.gameOverSound);
+            Time.timeScale = 0f;
+            gameOverCanvas.SetActive(true);
         }
     }
 }

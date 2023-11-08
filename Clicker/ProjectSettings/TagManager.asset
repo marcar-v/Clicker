@@ -9,6 +9,8 @@ TagManager:
   - Blue
   - Ground
   - Enemy
+  - DistanceController
+  - AudioManager
   layers:
   - Default
   - TransparentFX
