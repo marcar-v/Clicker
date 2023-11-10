@@ -8,6 +8,9 @@ public class GameOverController : MonoBehaviour
     DistanceController bestDistance;
     AudioManager audioManager;
 
+    [SerializeField] GameObject startingAnim;
+    [SerializeField] GameObject endingAnim;
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
@@ -23,13 +26,22 @@ public class GameOverController : MonoBehaviour
     public void RestartGame()
     {
         audioManager.PlaySFX(audioManager.clickSound);
+        startingAnim.SetActive(true);
+        Invoke("DisableStartingTransition", 1.5f);
         SceneManager.LoadSceneAsync(1);
         Time.timeScale = 1f;
+    }
+
+    void DisableStartingTransition()
+    {
+        startingAnim.SetActive(false);
     }
 
     public void QuitGame()
     {
         audioManager.PlaySFX(audioManager.clickSound);
+        endingAnim.SetActive(true);
         Application.Quit();
     }
+
 }

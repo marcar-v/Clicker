@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - DistanceController
   - AudioManager
+  - SceneController
   layers:
   - Default
   - TransparentFX

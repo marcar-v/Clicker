@@ -14,11 +14,12 @@ public class PlayerMovement : MonoBehaviour
 
     AudioManager audioManager;
 
+    [SerializeField] GameObject endingAnim;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-
+        //audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Fire1") && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce);
-            audioManager.PlaySFX(audioManager.jumpSound);
+            //audioManager.PlaySFX(audioManager.jumpSound);
         }
     }
 
@@ -57,9 +58,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isDead)
         {
-            audioManager.PlaySFX(audioManager.gameOverSound);
+            //audioManager.PlaySFX(audioManager.gameOverSound);
+            endingAnim.SetActive(true);
+            Invoke("DisableEndingTransition", 1.5f);
             Time.timeScale = 0f;
             gameOverCanvas.SetActive(true);
+            isDead = false;
         }
+    }
+    void DisableEndingTransition()
+    {
+        endingAnim.SetActive(false);
     }
 }

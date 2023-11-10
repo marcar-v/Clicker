@@ -14,10 +14,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator clickToJumpAnim;
     [SerializeField] GameObject clickToJumpText;
 
+
+
     private void Start()
     {
         Invoke("PlayAnimation", 0.5f);
     }
+
 
     void PlayAnimation()
     {

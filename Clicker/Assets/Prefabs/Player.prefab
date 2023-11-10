@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c4f415a76159b4fb75c6d6a10446d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 300
+  jumpForce: 350
+  gameOverCanvas: {fileID: 0}
+  endingAnim: {fileID: 0}
 --- !u!50 &3254999597491520944
 Rigidbody2D:
   serializedVersion: 4
